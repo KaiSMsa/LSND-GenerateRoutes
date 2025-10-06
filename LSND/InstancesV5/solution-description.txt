@@ -1,0 +1,44 @@
+tuple routeM_details
+{
+	{string}	route;
+	float		time;	
+	int			handCargo;
+	float		bunkerCost;
+	float		cargoCost;
+	float		portCalls;
+};
+
+tuple routeD_details
+{
+	int			vType;
+	{string}	route;
+	int			nbVessels;	//useful for model with two vists per week
+	float		toDeliver;
+	float		toPickUp;
+	float		totCost;
+	float		bunkerCost;
+	float		cargoCost;
+	float		portCalls;
+	int			nbTransPort;	// = 1 for simple route and 2 for butterfly routes
+};
+
+m976: <
+ {P10, P9, P8, P7, P6, P5, P4, P3, P1},	: route
+ 178.9,									: duration of the route (in hours)
+ 652, 									: max handled cargo of the routes (to be ignored)
+ 107340.0, 								: Bunker cost
+ 70980.0, 								: Cargo cost
+ 1800.0									: Port calls
+ >
+
+d131: <1,			: vessel type 1 => 100-TEU ;  2 => 200-TEU ;  3 => 300-TEU
+ {P3, P2, P11, P3}, : route
+ 1,					: to be ignored
+ 75,				: total delivered cargoes for the visited ports (P2 and P11 in this case)
+ 46, 				: total picked up cargoes for the visited ports (P2 and P11 in this case)
+ 23802.6, 			: Total Cost
+ 16242.6, 			: bunkerCost
+ 7260.0, 			: cargoCost
+ 300.0, 			: port Calls = nb visited ports * port cost (100 $) P3 is considered only one time because it gonna be considered in the next period 
+ 1					: nbTransPort		// = 1 for simple route and 2 for butterfly routes
+ >,
